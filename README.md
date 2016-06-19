@@ -18,4 +18,4 @@ This code will work fine and authenticate a user and recognize the authenticatio
 
 but on device you see this error...
 
-![https://github.com/aaronksaunders/basicaf2/blob/master/Screenshot%202016-06-18%2021.54.12.png](https://github.com/aaronksaunders/basicaf2/blob/master/Screenshot%202016-06-18%2021.54.12.png)
+![https://github.com/aaronksaunders/basicaf2/blob/master/Screenshot%202016-06-18%2021.54.12.png](https://raw.githubusercontent.com/aaronksaunders/basicaf2/master/Screenshot%202016-06-18%2021.54.12.png)
