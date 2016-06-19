@@ -10,7 +10,25 @@
    {{ authInfo  | json}}
     </pre>
 
-  <button block danger (click)="pushPage('Danger')">Danger</button>
-  <button block primary (click)="pushPage('Primary')">Primary</button>
-  <button block secondary (click)="pushPage('Secondary')">Secondary</button>
+  <div *ngIf="state.showLoginInfo === true">
+    <h2>hello</h2>
+    <form #loginCreds="ngForm">
+      <ion-item>
+        <ion-label>Username</ion-label>
+        <ion-input type="text" ngControl="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input type="password" ngControl="password"></ion-input>
+      </ion-item>
+
+      <div padding>
+        <button block (click)="loginClicked(loginCreds.value, $event)">Login</button>
+      </div>
+    </form>
+  </div>
+  <div padding *ngIf="!state.showLoginInfo">
+    <button block (click)="logoutClicked()">Logout</button>
+  </div>
 </ion-content>

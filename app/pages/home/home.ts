@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, NgZone} from "@angular/core";
 import {NavController} from 'ionic-angular';
 import {DetailPage} from '../detail/detail';
 import {Observable} from 'rxjs/Observable';
@@ -13,8 +13,10 @@ export class HomePage {
 
   textItems: Observable<any[]>;
   authInfo: any
+  state = { showLoginInfo: true }
+  error = {}
 
-  constructor(private _navController: NavController, public af: AngularFire) {
+  constructor(private _navController: NavController, public af: AngularFire, public zone: NgZone) {
 
   }
 
@@ -23,24 +25,42 @@ export class HomePage {
   }
 
   ngOnInit() {
-    try {
-      this.af.auth.subscribe((data) => {
-        console.log("in auth subscribe", data)
+    this.af.auth.subscribe((data) => {
+      console.log("in auth subscribe", data)
+
+      this.zone.run(() => {
 
         if (data) {
-
           this.authInfo = data.auth.providerData[0]
           alert("logged in")
-
+          this.state.showLoginInfo = false
         } else {
           alert("not logged in")
-
+          this.state.showLoginInfo = true
         }
-      })
+      });
+    })
+  }
 
-    } catch (EE) {
-      alert(EE)
+  logoutClicked() {
+    if (this.authInfo) {
+      this.af.auth.logout();
+      this.authInfo = null
     }
+  }
+
+
+  loginClicked(credentials) {
+        this.af.auth.login(credentials, {
+            provider: AuthProviders.Password,
+            method: AuthMethods.Password
+        }).then((authData) => {
+            console.log(authData)
+        }).catch((error) => {
+            this.error = error
+            console.log(error)
+        });
+
   }
   pushPage(buttonColor: string) {
     this._navController.push(DetailPage, { color: buttonColor });
