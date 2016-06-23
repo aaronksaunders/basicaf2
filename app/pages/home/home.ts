@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 
+
 @Component({
   templateUrl: 'build/pages/home/home.html'
 })
@@ -25,21 +26,19 @@ export class HomePage {
   }
 
   ngOnInit() {
+
     this.af.auth.subscribe((data) => {
       console.log("in auth subscribe", data)
 
-      this.zone.run(() => {
-
-        if (data) {
-          this.authInfo = data.auth.providerData[0]
-          alert("logged in")
-          this.state.showLoginInfo = false
-        } else {
-          alert("not logged in")
-          this.state.showLoginInfo = true
-        }
-      });
-    })
+      if (data) {
+        this.authInfo = data.auth.providerData[0]
+        alert("logged in")
+        this.state.showLoginInfo = false
+      } else {
+        alert("not logged in")
+        this.state.showLoginInfo = true
+      }
+    });
   }
 
   logoutClicked() {
@@ -51,15 +50,15 @@ export class HomePage {
 
 
   loginClicked(credentials) {
-        this.af.auth.login(credentials, {
-            provider: AuthProviders.Password,
-            method: AuthMethods.Password
-        }).then((authData) => {
-            console.log(authData)
-        }).catch((error) => {
-            this.error = error
-            console.log(error)
-        });
+    this.af.auth.login(credentials, {
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password
+    }).then((authData) => {
+      console.log(authData)
+    }).catch((error) => {
+      this.error = error
+      console.log(error)
+    });
 
   }
   pushPage(buttonColor: string) {
