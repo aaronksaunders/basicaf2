@@ -23,3 +23,20 @@ This code will work fine and authenticate a user and recognize the authenticatio
     })
   }
 ```  
+
+Be sure to install the Facebook Plugin
+```
+$ cordova plugin add cordova-plugin-facebook4 --save --variable APP_ID="123456789" --variable APP_NAME="myApp"
+```
+
+The inAppbrowser Plugin
+```
+$ cordova plugin add --save cordova-plugin-inappbrowser
+```
+
+Configure your Facebook App Correctly
+
+[http://ionicframework.com/docs/v2/native/facebook/](http://ionicframework.com/docs/v2/native/facebook/)
+
+Enable Facebook Auth in Firebase Console [https://console.firebase.google.com/](https://console.firebase.google.com/) under the authentication tab
+
