@@ -22,13 +22,16 @@
         <ion-label>Password</ion-label>
         <ion-input type="password" ngControl="password"></ion-input>
       </ion-item>
-
+      <ion-item *ngIf="error" padding text-wrap>
+        {{error?.message}}
+      </ion-item>
       <div padding>
         <button block (click)="loginClicked(loginCreds.value, $event)">Login</button>
       </div>
     </form>
   </div>
   <div padding *ngIf="!state.showLoginInfo">
+    <pre>{{(textItems | async) | json }}</pre>
     <button block (click)="logoutClicked()">Logout</button>
   </div>
 </ion-content>

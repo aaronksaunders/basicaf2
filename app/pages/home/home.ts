@@ -22,7 +22,7 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
-    this.af.auth.getAuth() && (this.textItems = this.af.database.list('/textItems'))
+    this.loadData()
   }
 
   ngOnInit() {
@@ -34,13 +34,19 @@ export class HomePage {
         this.authInfo = data.auth.providerData[0]
         alert("logged in")
         this.state.showLoginInfo = false
+
+        this.loadData();
+
       } else {
-        alert("not logged in")
+        console.log("not logged in")
         this.state.showLoginInfo = true
       }
     });
   }
 
+  loadData() {
+    this.authInfo && (this.textItems = this.af.database.list('/stuff'))
+  }
   logoutClicked() {
     if (this.authInfo) {
       this.af.auth.logout();
