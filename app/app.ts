@@ -15,10 +15,10 @@ import {
         FIREBASE_PROVIDERS,
         // Initialize Firebase app  
         defaultFirebase({
-            apiKey: "YOUR-KEY",
-            authDomain: "clearlyinnovative-firebasestarterapp.firebaseapp.com",
-            databaseURL: "https://clearlyinnovative-firebasestarterapp.firebaseio.com",
-            storageBucket: "clearlyinnovative-firebasestar.appspot.com",
+            apiKey: "AIzaSyBb0yc3UWwQPy_dvkcRLThNfQZuNx9jZ-g",
+            authDomain: "fir-starterapp.firebaseapp.com",
+            databaseURL: "https://fir-starterapp.firebaseio.com",
+            storageBucket: "fir-starterapp.appspot.com",
         }),
         firebaseAuthConfig({
             provider: AuthProviders.Password,
@@ -29,15 +29,15 @@ import {
     ]
 })
 export class MyApp {
-  rootPage: any = HomePage;
+    rootPage: any = HomePage;
 
-  constructor(platform: Platform) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-    });
-  }
+    constructor(platform: Platform) {
+        platform.ready().then(() => {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            StatusBar.styleDefault();
+        });
+    }
 }
 
 ionicBootstrap(MyApp);

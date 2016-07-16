@@ -2,9 +2,12 @@ import {Component, NgZone} from "@angular/core";
 import {NavController} from 'ionic-angular';
 import {DetailPage} from '../detail/detail';
 import {Observable} from 'rxjs/Observable';
+import {Facebook} from 'ionic-native'
 
 
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+
+declare var firebase: any
 
 
 @Component({
@@ -65,8 +68,28 @@ export class HomePage {
       this.error = error
       console.log(error)
     });
-
   }
+
+  loginFacebook() {
+
+    var facebookConfig = {
+      method: AuthMethods.OAuthToken,
+      provider: AuthProviders.Facebook
+    }
+
+    Facebook.login(['email'])
+      .then((_response) => {
+        console.log(_response)
+        var creds = firebase.auth.FacebookAuthProvider.credential(_response.authResponse.accessToken)
+        return this.af.auth.login(creds, facebookConfig)
+      }).then((authData) => {
+        console.log(authData)
+      }).catch((error) => {
+        this.error = { message: error }
+        console.log(error)
+      });
+  }
+
   pushPage(buttonColor: string) {
     this._navController.push(DetailPage, { color: buttonColor });
   }
